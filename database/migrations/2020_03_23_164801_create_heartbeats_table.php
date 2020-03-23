@@ -14,7 +14,8 @@ class CreateHeartbeatsTable extends Migration
     public function up()
     {
         Schema::create('heartbeats', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->uuid('user_id');
             $table->string('entity');
             $table->string('type')->nullable();
             $table->string('category')->nullable();

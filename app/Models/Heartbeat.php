@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Heartbeat extends Model
@@ -26,4 +27,22 @@ class Heartbeat extends Model
     protected $casts = [
         'created_at' => 'timestamp'
     ];
+
+    protected $keyType = 'string';
+
+    public $incrementing = false;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (self $model) {
+            $model->setAttribute('id', Str::uuid());
+        });
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

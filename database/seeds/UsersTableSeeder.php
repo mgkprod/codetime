@@ -19,8 +19,9 @@ class UsersTableSeeder extends Seeder
             User::firstOrCreate([
                 'email' => 'sr@mgk.dev',
             ], [
-                'name' => 'Simon',
+                'name' => 'MGK',
                 'password' => \Hash::make('1234'),
+                'api_key' => '626664d5-5639-4a80-a40c-785a02eeee0e',
                 'email_verified_at' => now(),
             ]);
         }
