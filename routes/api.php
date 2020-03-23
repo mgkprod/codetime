@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Heartbeat;
+use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +19,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::any('/heartbeat/{test?}', function (Request $request) {
+    collect($request->all())
+        ->each(function ($hb) {
+            $hearbeat = new Heartbeat();
+            $hearbeat->fill($hb);
+            $hearbeat->created_at = Carbon::createFromTimestamp($hb['time']);
+            $hearbeat->save();
+        });
+
+    return response()->json();
 });
