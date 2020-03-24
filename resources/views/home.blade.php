@@ -34,13 +34,42 @@
         <div class="col-md-6 mb-4">
             <div class="card">
                 <div class="card-header">Durations</div>
-                <div class="card-body"></div>
+                <div class="card-body p-0">
+                    @foreach ($durations as $activity)
+                        <div class="p-3">
+                            @if ($activity['project'])
+                                Project: <a href="#">{{ $activity['project'] }}</a><br>
+                            @else
+                                <a href="#">Unknown project</a><br>
+                            @endif
+                            On day: {{ $activity['day'] }}<br>
+                            From: {{ $activity['started_at'] }}<br>
+                            To: {{ $activity['last_heartbeat_at'] }}<br>
+                            Duration: {{ $activity['duration']->format('%H h %i m %s s') }}<br>
+                        </div>
+
+                        @if (!$loop->last)
+                            <hr class="m-0">
+                        @endif
+                    @endforeach
+                </div>
             </div>
         </div>
         <div class="col-md-6 mb-4">
             <div class="card">
                 <div class="card-header">Daily average</div>
-                <div class="card-body"></div>
+                <div class="card-body p-0">
+                    @foreach ($daily_averages as $activity)
+                        <div class="p-3">
+                            On day: {{ $activity['day'] }}<br>
+                            Duration: {{ $activity['duration']->format('%H h %i m %s s') }}<br>
+                        </div>
+
+                        @if (!$loop->last)
+                            <hr class="m-0">
+                        @endif
+                    @endforeach
+                </div>
             </div>
         </div>
         <div class="col-md-6 mb-4">
