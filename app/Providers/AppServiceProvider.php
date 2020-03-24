@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
 
         Carbon::setLocale(config('app.locale'));
         setlocale(LC_TIME, config('app.locale'));
+        Schema::defaultStringLength(191);
     }
 
     /**
