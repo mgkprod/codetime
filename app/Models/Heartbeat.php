@@ -25,7 +25,7 @@ class Heartbeat extends Model
     ];
 
     protected $casts = [
-        'created_at' => 'timestamp'
+        'created_at' => 'datetime'
     ];
 
     protected $keyType = 'string';

@@ -15,12 +15,12 @@ class CreateHeartbeatsTable extends Migration
     {
         Schema::create('heartbeats', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id');
+            $table->uuid('user_id')->index();
             $table->string('entity');
             $table->string('type')->nullable();
             $table->string('category')->nullable();
             $table->boolean('is_write')->nullable();
-            $table->string('project')->nullable();
+            $table->string('project')->nullable()->index();
             $table->string('branch')->nullable();
             $table->string('language')->nullable()->index();
             $table->string('user_agent')->nullable();
