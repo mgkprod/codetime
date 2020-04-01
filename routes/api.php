@@ -31,10 +31,24 @@ Route::any('/heartbeat/', function (Request $request) {
     // Collect heartbeats
     collect($request->all())
         ->each(function ($payload) use ($user) {
-            $hearbeat = new Heartbeat;
-            $hearbeat->fill($payload);
-            $hearbeat->created_at = Carbon::createFromTimestamp($payload['time']);
-            $hearbeat->user_id = $user->id;
+            $hearbeat = Heartbeat::firstOrCreate(
+                array_merge(
+                    collect($payload)->only([
+                        'entity',
+                        'type',
+                        'category',
+                        'is_write',
+                        'project',
+                        'branch',
+                        'language',
+                        'user_agent',
+                    ])->toArray(),
+                    [
+                        'created_at' => Carbon::createFromTimestamp($payload['time'])->setSecond(0),
+                        'user_id' => $user->id,
+                    ]
+                )
+            );
             $hearbeat->save();
         });
 

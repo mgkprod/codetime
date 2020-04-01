@@ -18,10 +18,10 @@ class Heartbeat extends Model
         'project',
         'branch',
         'language',
+        'user_agent',
         // Custom
-        'operating_system',
-        'editor',
-        'machine_name',
+        'user_id',
+        'created_at',
     ];
 
     protected $casts = [
@@ -37,7 +37,7 @@ class Heartbeat extends Model
         parent::boot();
 
         static::creating(function (self $model) {
-            $model->setAttribute('id', Str::uuid());
+            if (!$model->id) $model->setAttribute('id', Str::uuid());
         });
     }
 

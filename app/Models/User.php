@@ -47,7 +47,7 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function (self $model) {
-            $model->setAttribute('id', Str::uuid());
+            if (!$model->id) $model->setAttribute('id', Str::uuid());
         });
     }
 
