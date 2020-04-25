@@ -24,9 +24,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::any('/heartbeat/', function (Request $request) {
     // Autenticate
-    $token = $request->header('Authorization');
-    $api_key = base64_decode(str_replace('Basic ', '', $token));
-    $user = User::where('api_key', $api_key)->firstOrFail();
+    try {
+        $token = $request->header('Authorization');
+        $api_key = base64_decode(str_replace('Basic ', '', $token));
+        $user = User::where('api_key', $api_key)->firstOrFail();
+    } catch (\Throwable $th) {
+        return abort(403);
+    }
 
     // Collect heartbeats
     collect($request->all())
