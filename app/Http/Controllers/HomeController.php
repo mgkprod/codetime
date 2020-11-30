@@ -10,11 +10,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $timeout = 15;
+        $timeout = request()->get('timeout', 15);
         $userId = auth()->user()->id;
 
         $codingActivity = $this->getDurations(
-            now()->subDay(7)->startOfDay(),
+            now()->subDay(request()->get('days', 14))->startOfDay(),
             now(),
             $timeout,
             $userId,
@@ -28,8 +28,6 @@ class HomeController extends Controller
             $userId,
             1
         );
-
-        dump($durations);
 
         $categoriesUsed = collect();
         $dailyAverages = collect();
