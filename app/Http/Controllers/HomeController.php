@@ -72,4 +72,19 @@ class HomeController extends Controller
             ->orderBy('started_at', 'ASC')
             ->get();
     }
+
+    public function wakacfg()
+    {
+        $api_key = auth()->user()->api_key;
+        $api_url = route('api.heartbeat');
+        $no_ssl_verify = true;
+
+        $wakacfg = ''
+            . '[settings]' . "\r\n"
+            . 'api_key = ' . $api_key . "\r\n"
+            . 'api_url = ' . $api_url . "\r\n"
+            . 'no_ssl_verify = ' . ($no_ssl_verify ? 'true' : 'false') . "\r\n";
+
+        return view('wakacfg', compact('wakacfg'));
+    }
 }

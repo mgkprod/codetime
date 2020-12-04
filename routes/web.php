@@ -19,6 +19,7 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('wakacfg', 'HomeController@wakacfg')->name('wakacfg');
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 });

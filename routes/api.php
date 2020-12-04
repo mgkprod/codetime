@@ -57,4 +57,4 @@ Route::any('/heartbeat/', function (Request $request) {
         });
 
     return response()->json([], 202);
-});
+})->name('api.heartbeat');
