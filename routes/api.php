@@ -1,9 +1,6 @@
 <?php
 
-use App\Models\Heartbeat;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
+use App\Http\Controllers\Api\WakatimeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,39 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::any('/users/current/heartbeats.bulk', function (Request $request) {
-    // Autenticate
-    try {
-        $token = $request->header('Authorization');
-        $api_key = base64_decode(str_replace('Basic ', '', $token));
-        $user = User::where('api_key', $api_key)->firstOrFail();
-    } catch (\Throwable $th) {
-        return abort(403);
-    }
+Route::post('/heartbeat', [WakatimeController::class, 'heartbeat'])->name('api.heartbeat');
+Route::post('/heartbeats', [WakatimeController::class, 'heartbeat'])->name('api.heartbeats');
 
-    // Collect heartbeats
-    collect($request->all())
-        ->each(function ($payload) use ($user) {
-            $hearbeat = Heartbeat::firstOrCreate(
-                array_merge(
-                    collect($payload)->only([
-                        'entity',
-                        'type',
-                        'category',
-                        'is_write',
-                        'project',
-                        'branch',
-                        'language',
-                        'user_agent',
-                    ])->toArray(),
-                    [
-                        'created_at' => Carbon::createFromTimestamp($payload['time'])->setSecond(0),
-                        'user_id' => $user->id,
-                    ]
-                )
-            );
-            $hearbeat->save();
-        });
-
-    return response()->json([], 202);
-})->name('api.heartbeats.bulk');
+Route::post('/users/{user}/heartbeats', [WakatimeController::class, 'heartbeat']);
+Route::post('/users/{user}/heartbeats.bulk', [WakatimeController::class, 'heartbeat']);
+Route::post('/v1/users/{user}/heartbeats', [WakatimeController::class, 'heartbeat']);
+Route::post('/v1/users/{user}/heartbeats.bulk', [WakatimeController::class, 'heartbeat']);
