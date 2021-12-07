@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -16,15 +16,15 @@ class LoginController extends Controller
     {
         $validator = validator()->make($request->input(), [
             'email' => ['required', 'email', 'exists:users'],
-            'password' => ['required']
+            'password' => ['required'],
         ]);
         $validator->validate();
 
         $remember = $request->remember ?? false;
 
-        if (!auth()->attempt([
+        if (! auth()->attempt([
             'email' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
         ], $remember)) {
             $validator->errors()->add('password', __('auth.failed'));
 

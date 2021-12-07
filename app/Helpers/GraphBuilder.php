@@ -171,7 +171,7 @@ class GraphBuilder
 
         return [
             'labels' => $projects->keys(),
-            'data' => $data
+            'data' => $data,
         ];
     }
 }

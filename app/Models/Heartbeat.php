@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Heartbeat extends Model
 {
@@ -25,7 +25,7 @@ class Heartbeat extends Model
     ];
 
     protected $casts = [
-        'created_at' => 'datetime'
+        'created_at' => 'datetime',
     ];
 
     protected $keyType = 'string';
@@ -37,7 +37,9 @@ class Heartbeat extends Model
         parent::boot();
 
         static::creating(function (self $model) {
-            if (!$model->id) $model->setAttribute('id', Str::uuid());
+            if (! $model->id) {
+                $model->setAttribute('id', Str::uuid());
+            }
         });
     }
 
