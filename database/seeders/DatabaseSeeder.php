@@ -1,13 +1,16 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
+namespace Database\Seeders;
 
-class UsersTableSeeder extends Seeder
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
+class DatabaseSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Seed the application's database.
      *
      * @return void
      */
@@ -19,8 +22,8 @@ class UsersTableSeeder extends Seeder
             User::firstOrCreate([
                 'email' => 'sr@mgk.dev',
             ], [
-                'name' => 'MGK',
-                'password' => \Hash::make('1234'),
+                'name' => 'Simon Rubuano',
+                'password' => Hash::make('1234'),
                 'api_key' => '626664d5-5639-4a80-a40c-785a02eeee0e',
                 'email_verified_at' => now(),
             ]);

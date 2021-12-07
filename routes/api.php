@@ -1,8 +1,7 @@
 <?php
 
-use App\Models\User;
 use App\Models\Heartbeat;
-use Jenssegers\Agent\Agent;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -17,47 +16,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::any('/heartbeat', function (Request $request) {
-    // Autenticate
-    try {
-        $token = $request->header('Authorization');
-        $api_key = base64_decode(str_replace('Basic ', '', $token));
-        $user = User::where('api_key', $api_key)->firstOrFail();
-    } catch (\Throwable $th) {
-        return abort(403);
-    }
-
-    // Collect heartbeats
-    collect($request->all())
-        ->each(function ($payload) use ($user) {
-            $hearbeat = Heartbeat::firstOrCreate(
-                array_merge(
-                    collect($payload)->only([
-                        'entity',
-                        'type',
-                        'category',
-                        'is_write',
-                        'project',
-                        'branch',
-                        'language',
-                        'user_agent',
-                    ])->toArray(),
-                    [
-                        'created_at' => Carbon::createFromTimestamp($payload['time'])->setSecond(0),
-                        'user_id' => $user->id,
-                    ]
-                )
-            );
-            $hearbeat->save();
-        });
-
-    return response()->json([], 202);
-})->name('api.heartbeat');
 
 Route::any('/users/current/heartbeats.bulk', function (Request $request) {
     // Autenticate
