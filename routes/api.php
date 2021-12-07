@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\WakatimeController;
+use App\Http\Controllers\Api\WakaTimeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/heartbeat', [WakatimeController::class, 'heartbeat'])->name('api.heartbeat');
-Route::post('/heartbeats', [WakatimeController::class, 'heartbeat'])->name('api.heartbeats');
+Route::post('/heartbeat', [WakaTimeController::class, 'heartbeat'])->name('api.heartbeat');
+Route::post('/heartbeats', [WakaTimeController::class, 'heartbeat'])->name('api.heartbeats');
 
-Route::post('/users/{user}/heartbeats', [WakatimeController::class, 'heartbeat']);
-Route::post('/users/{user}/heartbeats.bulk', [WakatimeController::class, 'heartbeat']);
-Route::post('/v1/users/{user}/heartbeats', [WakatimeController::class, 'heartbeat']);
-Route::post('/v1/users/{user}/heartbeats.bulk', [WakatimeController::class, 'heartbeat']);
+Route::post('/users/{user}/heartbeats', [WakaTimeController::class, 'heartbeat']);
+Route::post('/users/{user}/heartbeats.bulk', [WakaTimeController::class, 'heartbeat']);
+Route::post('/v1/users/{user}/heartbeats', [WakaTimeController::class, 'heartbeat']);
+Route::post('/v1/users/{user}/heartbeats.bulk', [WakaTimeController::class, 'heartbeat']);
+
+Route::get('/users/{user}/statusbar/today', [WakaTimeController::class, 'statusbar']);

@@ -71,6 +71,118 @@ class WakatimeController extends Controller
         return response()->json($finalResponse, 201);
     }
 
+    public function statusbar($user = null)
+    {
+        $user = $this->authenticate($user);
+        abort_if($user == null, 403);
+
+        $text = 'Connected to ' . config('app.name');
+
+        return [
+            'cached_at' => 'string',
+            'data' => [
+                'categories' => [
+                    [
+                        'digital' => 'string',
+                        'hours' => 0,
+                        'minutes' => 0,
+                        'name' => 'string',
+                        'percent' => 0,
+                        'seconds' => 0,
+                        'text' => 'string',
+                        'total_seconds' => 0,
+                    ],
+                ],
+                'dependencies' => [
+                    [
+                        'digital' => 'string',
+                        'hours' => 0,
+                        'minutes' => 0,
+                        'name' => 'string',
+                        'percent' => 0,
+                        'seconds' => 0,
+                        'text' => 'string',
+                        'total_seconds' => 0,
+                    ],
+                ],
+                'editors' => [
+                    [
+                        'digital' => 'string',
+                        'hours' => 0,
+                        'minutes' => 0,
+                        'name' => 'string',
+                        'percent' => 0,
+                        'seconds' => 0,
+                        'text' => 'string',
+                        'total_seconds' => 0,
+                    ],
+                ],
+                'languages' => [
+                    [
+                        'digital' => 'string',
+                        'hours' => 0,
+                        'minutes' => 0,
+                        'name' => 'string',
+                        'percent' => 0,
+                        'seconds' => 0,
+                        'text' => 'string',
+                        'total_seconds' => 0,
+                    ],
+                ],
+                'machines' => [
+                    [
+                        'digital' => 'string',
+                        'hours' => 0,
+                        'minutes' => 0,
+                        'name' => 'string',
+                        'percent' => 0,
+                        'seconds' => 0,
+                        'text' => 'string',
+                        'total_seconds' => 0,
+                    ],
+                ],
+                'operating_systems' => [
+                    [
+                        'digital' => 'string',
+                        'hours' => 0,
+                        'minutes' => 0,
+                        'name' => 'string',
+                        'percent' => 0,
+                        'seconds' => 0,
+                        'text' => 'string',
+                        'total_seconds' => 0,
+                    ],
+                ],
+                'projects' => [
+                    [
+                        'digital' => 'string',
+                        'hours' => 0,
+                        'minutes' => 0,
+                        'name' => 'string',
+                        'percent' => 0,
+                        'seconds' => 0,
+                        'text' => 'string',
+                        'total_seconds' => 0,
+                    ],
+                ],
+                'grand_total' => [
+                    'digital' => 'string',
+                    'hours' => 0,
+                    'minutes' => 0,
+                    'text' => $text,
+                    'total_seconds' => 0,
+                ],
+                'range' => [
+                    'date' => 'string',
+                    'end' => 'string',
+                    'start' => 'string',
+                    'text' => 'string',
+                    'timezone' => 'string',
+                ],
+            ],
+        ];
+    }
+
     protected function authenticate($user = null)
     {
         // Autenticate request
