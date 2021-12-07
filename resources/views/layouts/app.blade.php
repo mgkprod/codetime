@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="bg-white shadow-sm navbar navbar-expand-md navbar-light">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="/svg/logo.svg" alt="{{ config('app.name', 'Laravel') }}" height="30px">
@@ -31,10 +31,10 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="mr-auto navbar-nav">
                     </ul>
 
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="ml-auto navbar-nav">
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -75,6 +75,10 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <div class="container text-center">
+            {{ config('app.name') }} - {{ $version }}
+        </div>
     </div>
 
     @stack('js')
