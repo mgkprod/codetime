@@ -75,13 +75,16 @@ class HomeController extends Controller
     {
         $api_key = auth()->user()->api_key;
         $api_url = route('api.heartbeat');
-        $no_ssl_verify = true;
 
         $wakacfg = ''
-            . '[settings]' . "\r\n"
-            . 'api_key = ' . $api_key . "\r\n"
-            . 'api_url = ' . $api_url . "\r\n"
-            . 'no_ssl_verify = ' . ($no_ssl_verify ? 'true' : 'false') . "\r\n";
+            . '[settings]' . PHP_EOL
+            . 'api_key = ' . $api_key . PHP_EOL
+            . 'api_url = ' . $api_url . PHP_EOL
+            . 'status_bar_coding_activity = false' . PHP_EOL;
+
+        if (! request()->secure()) {
+            $wakacfg .= 'no_ssl_verify = true' . PHP_EOL;
+        }
 
         return view('wakacfg', compact('wakacfg'));
     }
