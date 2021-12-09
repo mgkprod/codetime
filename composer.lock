@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9a06f9e96492effea6a3792d83700c0d",
+    "content-hash": "5ef03db9ccfbbeb9d106307058c07ff9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -121,6 +121,64 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
+        },
+        {
+            "name": "calebporzio/awesome-helpers",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/calebporzio/awesome-helpers.git",
+                "reference": "63d39c24fe151fce53e9dac99d5637fa231cb7dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/calebporzio/awesome-helpers/zipball/63d39c24fe151fce53e9dac99d5637fa231cb7dd",
+                "reference": "63d39c24fe151fce53e9dac99d5637fa231cb7dd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.12",
+                "illuminate/support": "5.7.*|5.8.*|^6.0|^7.0|^8.0",
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Calebporzio\\AwesomeHelpers\\AwesomeHelpersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Calebporzio\\AwesomeHelpers\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Porzio",
+                    "email": "calebporzio@gmail.com"
+                }
+            ],
+            "description": "Helper functions I find super-duper handy",
+            "homepage": "https://github.com/calebporzio/awesome-helpers",
+            "keywords": [
+                "awesome-helpers",
+                "calebporzio"
+            ],
+            "support": {
+                "issues": "https://github.com/calebporzio/awesome-helpers/issues",
+                "source": "https://github.com/calebporzio/awesome-helpers/tree/v2.5.0"
+            },
+            "time": "2021-01-20T17:40:59+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -1724,6 +1782,59 @@
                 }
             ],
             "time": "2021-11-21T11:48:40+00:00"
+        },
+        {
+            "name": "molayli/laravel-cloudflare-real-ip",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/molayli/laravel-cloudflare-real-ip.git",
+                "reference": "860d4aa5bc41d3e3827ed78345ec0bdef5eb830d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/molayli/laravel-cloudflare-real-ip/zipball/860d4aa5bc41d3e3827ed78345ec0bdef5eb830d",
+                "reference": "860d4aa5bc41d3e3827ed78345ec0bdef5eb830d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Molayli\\CloudflareRealIpServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Molayli\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Billal",
+                    "email": "hello@molayli.com"
+                }
+            ],
+            "description": "Get the real ip for laravel applications behind cloudflare's reverse proxy",
+            "homepage": "https://github.com/molayli/laravel-cloudflare-real-ip",
+            "keywords": [
+                "cloudflare",
+                "laravel",
+                "real ip address"
+            ],
+            "support": {
+                "issues": "https://github.com/molayli/laravel-cloudflare-real-ip/issues",
+                "source": "https://github.com/molayli/laravel-cloudflare-real-ip/tree/master"
+            },
+            "time": "2018-01-19T16:51:42+00:00"
         },
         {
             "name": "monolog/monolog",
