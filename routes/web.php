@@ -25,3 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('wakacfg', [HomeController::class, 'wakacfg'])->name('wakacfg');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
+
+// Route::get('/', function () {
+//     return inertia('index');
+// });
