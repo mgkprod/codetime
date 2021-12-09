@@ -141,4 +141,3 @@ $config = new PhpCsFixer\Config();
 return $config->setRules($fixers)
     ->setFinder($finder)
     ->setRiskyAllowed(true);
-
