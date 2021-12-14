@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -40,6 +41,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'settings' => 'json',
     ];
 
     protected $keyType = 'string';
@@ -54,11 +56,20 @@ class User extends Authenticatable
             if (! $model->id) {
                 $model->setAttribute('id', Str::uuid());
             }
+
+            if (! $model->api_key) {
+                $model->setAttribute('api_key', Str::uuid());
+            }
         });
     }
 
     public function heartbeats()
     {
         return $this->hasMany(Heartbeat::class);
+    }
+
+    public function getSetting($key, $default = null)
+    {
+        return Arr::dot($this->settings)[$key] ?? $default;
     }
 }

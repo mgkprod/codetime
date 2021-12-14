@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ForwardHeartbeatJob;
 use App\Models\Heartbeat;
 use App\Models\User;
 use Illuminate\Support\Carbon;
@@ -66,6 +67,14 @@ class WakaTimeController extends Controller
         $finalResponse = ['responses' => []];
         for ($i = 0; $i < $createdHeartbeats; $i++) {
             $finalResponse['responses'][] = [null, 201];
+        }
+
+        // Forward heartbeat(s) to WakaTime
+        if ($user->getSetting('wakatime.forwardHeartbeats', false)) {
+            dispatch(new ForwardHeartbeatJob(
+                $user->getSetting('wakatime.apiToken', null),
+                $payloads
+            ));
         }
 
         return response()->json($finalResponse, 201);
