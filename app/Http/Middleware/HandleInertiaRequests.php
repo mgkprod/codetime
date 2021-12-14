@@ -31,13 +31,46 @@ class HandleInertiaRequests extends Middleware
      * Defines the props that are shared by default.
      *
      * @see https://inertiajs.com/shared-data
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
-            //
+            'appName' => fn () => config('app.name'),
+            'authUser' => function () use ($request) {
+                if (! $request->user()) {
+                    return null;
+                }
+
+                return array_merge(
+                    $request->user()->only('id', 'name', 'email'),
+                    [
+                        'roles' => $request->user()->roles->pluck('name'),
+                        'permissions' => $request->user()->permissions->pluck('name'),
+                    ],
+                );
+            },
+            'errors' => fn () => $this->sharedValidationErrors($request),
+            'flash' => fn () => [
+                'success' => $request->session()->get('success'),
+                'warning' => $request->session()->get('warning'),
+                'error' => $request->session()->get('error'),
+            ],
         ]);
+    }
+
+    /**
+     * Resolve shared validation errors.
+     *
+     * @return \Illuminate\Contracts\Support\MessageBag|\stdClass
+     */
+    protected function sharedValidationErrors($request)
+    {
+        if ($errors = $request->session()->get('errors')) {
+            return $errors->getBag('default');
+        }
+
+        return new \stdClass;
     }
 }
