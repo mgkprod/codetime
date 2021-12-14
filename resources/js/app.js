@@ -1,12 +1,25 @@
-require("./bootstrap");
+require('./bootstrap');
 
-import Vue from "vue";
-import { createInertiaApp } from "@inertiajs/inertia-vue";
-import { InertiaProgress } from "@inertiajs/progress";
+import Vue from 'vue';
+import { createInertiaApp, InertiaLink } from '@inertiajs/inertia-vue';
+import { InertiaProgress } from '@inertiajs/progress';
+
+Vue.config.productionTip = false;
+
+Vue.mixin({
+  computed: {
+    _: () => window._,
+  },
+
+  methods: {
+    route: window.route,
+    moment: window.moment,
+  },
+});
 
 InertiaProgress.init();
 
-Vue.prototype.$route = route;
+Vue.component('inertia-link', InertiaLink);
 
 /**
  * The following block of code may be used to automatically register your
@@ -17,21 +30,13 @@ Vue.prototype.$route = route;
  */
 
 const files = require.context('./', true, /\.vue$/i);
-files.keys().map((key) =>
-  Vue.component(
-    key
-      .split('/')
-      .pop()
-      .split('.')[0],
-    files(key).default,
-  ),
-);
+files.keys().map((key) => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 createInertiaApp({
-    resolve: (name) => require(`./pages/${name}`),
-    setup({ el, App, props }) {
-        new Vue({
-            render: (h) => h(App, props),
-        }).$mount(el);
-    },
+  resolve: (name) => require(`./pages/${name}`),
+  setup({ el, App, props }) {
+    new Vue({
+      render: (h) => h(App, props),
+    }).$mount(el);
+  },
 });
