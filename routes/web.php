@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,15 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'guest'], function () {
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [LoginController::class, 'login']);
-});
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'confirm' => false,
+    'verify' => false,
+]);
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::get('wakacfg', [HomeController::class, 'wakacfg'])->name('wakacfg');
-    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::redirect('/', '/dashboard')->name('index');
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard/data', [HomeController::class, 'data'])->name('dashboard.data');
+
+    Route::get('/wakacfg', [HomeController::class, 'wakacfg'])->name('wakacfg');
 });
 
 // Route::get('/', function () {

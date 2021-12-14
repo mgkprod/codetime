@@ -43,13 +43,7 @@ class HandleInertiaRequests extends Middleware
                     return null;
                 }
 
-                return array_merge(
-                    $request->user()->only('id', 'name', 'email'),
-                    [
-                        'roles' => $request->user()->roles->pluck('name'),
-                        'permissions' => $request->user()->permissions->pluck('name'),
-                    ],
-                );
+                return $request->user()->only('id', 'name', 'email');
             },
             'errors' => fn () => $this->sharedValidationErrors($request),
             'flash' => fn () => [

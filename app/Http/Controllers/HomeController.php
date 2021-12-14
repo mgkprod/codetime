@@ -6,7 +6,12 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function dashboard()
+    {
+        return inertia('dashboard');
+    }
+
+    public function data()
     {
         $timeout = request()->get('timeout', 15);
         $userId = auth()->user()->id;
@@ -33,15 +38,9 @@ class HomeController extends Controller
         $editorsUsed = collect();
         $projects = collect();
 
-        return view('home', compact(
-            'codingActivity',
-            'durations',
-            'categoriesUsed',
-            'dailyAverages',
-            'languages',
-            'editorsUsed',
-            'projects',
-        ));
+        return  [
+            'codingActivity' => \App\Helpers\GraphBuilder::codingActivity($codingActivity),
+        ];
     }
 
     public function getDurations($from, $to, $timeout, $userId, $level = 0)
@@ -73,19 +72,21 @@ class HomeController extends Controller
 
     public function wakacfg()
     {
-        $api_key = auth()->user()->api_key;
-        $api_url = route('api.heartbeat');
+        $apiKey = auth()->user()->api_key;
+        $apiUrl = route('api.heartbeat');
 
         $wakacfg = ''
             . '[settings]' . PHP_EOL
-            . 'api_key = ' . $api_key . PHP_EOL
-            . 'api_url = ' . $api_url . PHP_EOL
+            . 'api_key = ' . $apiKey . PHP_EOL
+            . 'api_url = ' . $apiUrl . PHP_EOL
             . 'status_bar_coding_activity = false' . PHP_EOL;
 
         if (! request()->secure()) {
             $wakacfg .= 'no_ssl_verify = true' . PHP_EOL;
         }
 
-        return view('wakacfg', compact('wakacfg'));
+        return inertia('wakacfg', [
+            'wakacfg' => $wakacfg,
+        ]);
     }
 }
