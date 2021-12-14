@@ -28,20 +28,6 @@ class WakaTimeController extends Controller
                 $hearbeat = Heartbeat::firstOrCreate(
                     array_merge(
                         collect($payload)->only([
-                            // branch": "string",
-                            // "category": "string",
-                            // "created_at": 0,
-                            // "editor": "string",
-                            // "entity": "string",
-                            // "id": 0,
-                            // "is_write": true,
-                            // "language": "string",
-                            // "machine": "string",
-                            // "operating_system": "string",
-                            // "project": "string",
-                            // "time": 0,
-                            // "type": "string",
-                            // "user_agent": "string"
                             'entity',
                             'type',
                             'category',
@@ -50,6 +36,9 @@ class WakaTimeController extends Controller
                             'branch',
                             'language',
                             'user_agent',
+                            'editor',
+                            'machine',
+                            'operating_system',
                         ])->toArray(),
                         [
                             'created_at' => Carbon::createFromTimestamp($payload['time']),
@@ -62,7 +51,7 @@ class WakaTimeController extends Controller
                 $createdHeartbeats++;
             });
 
-        // construct weird response format to make the cli consider all heartbeats to having been successfully saved
+        // Construct weird response format to make the cli consider all heartbeats to having been successfully saved
         // @see: https://github.com/muety/wakapi/blob/master/routes/api/heartbeat.go#L155-L174
         $finalResponse = ['responses' => []];
         for ($i = 0; $i < $createdHeartbeats; $i++) {
