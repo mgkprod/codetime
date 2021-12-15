@@ -1,8 +1,14 @@
 <template>
-  <div class="flex flex-col items-start w-full mx-auto mb-8 overflow-hidden bg-white rounded shadow-sm">
-    <div class="w-full px-5 py-4 font-semibold bg-gray-50">Coding activity</div>
-    <div class="w-full px-5 py-4">
-      <canvas ref="coding-activity" class="w-100" style="height: 500px"></canvas>
+  <div>
+    <div class="flex flex-col items-start w-full mx-auto mb-8 p-8 overflow-hidden rounded-lg shadow-xl bg-[#272844]">
+      <div class="mb-8 text-lg text-white font-tomorrow">
+        Coding activity
+        <div class="w-24 border-b-2 border-current"></div>
+      </div>
+
+      <div class="w-full px-5 py-4 bg-white rounded-lg">
+        <canvas ref="coding-activity" class="w-100" style="height: 500px"></canvas>
+      </div>
     </div>
   </div>
 </template>
