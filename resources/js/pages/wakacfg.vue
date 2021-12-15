@@ -1,26 +1,25 @@
 <template>
-  <div class="max-w-lg mx-auto">
-    <div class="flex flex-col items-start w-full mx-auto mb-8 p-8 overflow-hidden rounded-lg shadow-xl bg-[#272844]">
-      <div class="mb-8 text-lg text-white font-tomorrow">
-        Environement configuration
-        <div class="w-24 border-b-2 border-current"></div>
-      </div>
+  <div class="w-full max-w-xl mx-auto">
+    <div class="flex flex-col p-8 mx-auto mb-8 space-y-4 bg-white shadow-xl shadow-gray-200">
+      <div class="font-bold">Environement configuration</div>
+      <hr class="w-full border-gray-200" />
 
-      <p class="mb-4">codetracker█ relies on <a href="https://wakatime.com/plugins" target="_blank" class="transition duration-200 ease-in-out border-b border-current hover:border-white hover:text-white">WakaTime plugins</a> to retrieve code statistics.</p>
+      <p>codetracker█ relies on <a href="https://wakatime.com/plugins" target="_blank" class="transition duration-200 ease-in-out border-b border-current hover:opacity-80">WakaTime plugins</a> to retrieve code statistics.</p>
+      <p>In order to connect the plugins, you must specify a custom server in the global WakaTime configuration file.</p>
 
-      <p class="mb-4">
-        In order to connect the plugins, you must specify a custom server in the global WakaTime configuration file.<br />
-        This file is usually located in your user folder:
-      </p>
-
-      <ul class="mb-4">
-        <li><code class="text-[#7C8EB6]">/home/{username}/.wakatime.cfg</code> on macOS and Linux,</li>
-        <li><code class="text-[#7C8EB6]">C:\Users\{username}\.wakatime.cfg</code> on Windows</li>
+      <p>This file is usually located in your user folder:</p>
+      <ul>
+        <li><code class="inline-block px-2 py-1 bg-gray-100 rounded">/home/{username}/.wakatime.cfg</code> on macOS and Linux,</li>
+        <li><code class="inline-block px-2 py-1 bg-gray-100 rounded">C:\Users\{username}\.wakatime.cfg</code> on Windows</li>
       </ul>
 
-      <p class="mb-4">Replace the contents with the followings in your <code class="text-[#7C8EB6]">.wakatime.cfg</code> file:</p>
+      <div class="p-4 text-yellow-700 bg-yellow-200 border-l-4 border-yellow-300">
+        <span class="font-bold"></span>
+        If you're using Sublime Text, you may find your configuration file <a class="transition duration-200 ease-in-out border-b border-current hover:opacity-80" href="https://github.com/wakatime/sublime-wakatime#troubleshooting" target="_blank">elsewhere</a>.
+      </div>
 
-      <pre class="p-4 border text-[#7C8EB6] border-[#7C8EB6] w-full">{{ wakacfg }}</pre>
+      <p>Replace the contents with the followings:</p>
+      <pre class="w-full p-4 bg-gray-100 border-l-4 border-gray-300">{{ wakacfg }}</pre>
     </div>
   </div>
 </template>

@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+.flicker {
+  animation: fadeIn 0.5s infinite alternate;
+  display: inline-block;
+}

@@ -3,11 +3,7 @@
     <nav class="w-full my-8">
       <div class="container max-w-screen-xl px-8 mx-auto">
         <div class="flex flex-wrap items-center">
-          <inertia-link :href="route('index')">
-            <div class="flex flex-row items-center h-16">
-              <img src="/images/logo.svg" class="h-4" />
-            </div>
-          </inertia-link>
+          <inertia-link :href="route('index')" class="font-bold">codetracker<span class="flicker">█</span></inertia-link>
 
           <button class="ml-auto text-white md:hidden focus:outline-none" @click="toggle">
             <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
@@ -20,9 +16,10 @@
             <inertia-link
               :href="route('dashboard')"
               :class="{
-                'bg-white bg-opacity-5 text-white': route().current('dashboard*'),
+                'text-white bg-[#DD524D]': route().current('dashboard*'),
+                'hover:bg-gray-200': !route().current('dashboard*'),
               }"
-              class="inline-block px-4 py-2 text-sm font-semibold transition duration-200 ease-in-out rounded-lg hover:text-white"
+              class="inline-block px-4 py-2 text-sm font-bold transition duration-200 ease-in-out"
             >
               <i class="mr-1 opacity-50 fas fa-chart-line"></i> Dashboard
             </inertia-link>
@@ -30,14 +27,15 @@
             <inertia-link
               :href="route('wakacfg')"
               :class="{
-                'bg-white bg-opacity-5 text-white': route().current('wakacfg*'),
+                'text-white bg-[#DD524D]': route().current('wakacfg*'),
+                'hover:bg-gray-200': !route().current('wakacfg*'),
               }"
-              class="inline-block px-4 py-2 text-sm font-semibold transition duration-200 ease-in-out rounded-lg hover:text-white"
+              class="inline-block px-4 py-2 text-sm font-bold transition duration-200 ease-in-out"
             >
               <i class="mr-1 opacity-50 fas fa-cog"></i> Settings
             </inertia-link>
 
-            <button type="button" class="inline-block px-4 py-2 text-sm font-semibold transition duration-200 ease-in-out rounded-lg hover:text-white focus:outline-none" @click="$inertia.post(route('logout'))"><i class="opacity-50 fas fa-sign-out-alt"></i></button>
+            <button type="button" class="inline-block px-4 py-2 text-sm font-bold transition duration-200 ease-in-out hover:bg-gray-200 hover:text-black focus:outline-none" @click="$inertia.post(route('logout'))"><i class="fas fa-sign-out-alt"></i></button>
           </div>
         </div>
       </div>
@@ -49,9 +47,9 @@
       <slot />
     </div>
 
-    <footer class="container flex flex-row justify-between w-full px-4 py-8 mx-auto mt-auto text-xs text-center text-gray-400">
+    <footer class="container flex flex-row justify-between w-full max-w-screen-xl px-8 py-4 mx-auto my-8 mt-auto text-xs text-center text-gray-400">
       <div>{{ $page.props.version }}</div>
-      <div>Made with ♥ by <a href="https://mgk.dev" class="transition duration-200 ease-in-out border-b border-current hover:border-white hover:text-white" target="_blank">Simon Rubuano</a> as <a href="https://github.com/mgkprod/codetracker" class="transition duration-200 ease-in-out border-b border-current hover:border-white hover:text-white" target="_blank">open-source software</a>.</div>
+      <div>Made with ♥ by <a href="https://mgk.dev" class="transition duration-200 ease-in-out border-b border-current hover:opacity-80" target="_blank">Simon Rubuano</a> as <a href="https://github.com/mgkprod/codetracker" class="transition duration-200 ease-in-out border-b border-current hover:opacity-80" target="_blank">open-source software</a>.</div>
     </footer>
   </div>
 </template>

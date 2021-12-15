@@ -17,7 +17,7 @@ Vue.mixin({
   },
 });
 
-InertiaProgress.init();
+InertiaProgress.init({ color: '#DD524D' });
 
 Vue.component('inertia-link', InertiaLink);
 
