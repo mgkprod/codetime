@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-start min-h-screen">
     <nav class="w-full my-8">
-      <div class="container max-w-screen-xl px-8 mx-auto">
+      <div class="container px-8 mx-auto">
         <div class="flex flex-wrap items-center">
           <inertia-link :href="route('index')" class="font-bold">codetracker<span class="flicker">█</span></inertia-link>
 
@@ -43,11 +43,11 @@
 
     <alerts></alerts>
 
-    <div class="container max-w-screen-xl px-8 mx-auto">
+    <div class="container px-8 mx-auto">
       <slot />
     </div>
 
-    <footer class="container flex flex-row justify-between w-full max-w-screen-xl px-8 py-4 mx-auto my-8 mt-auto text-xs text-center text-gray-400">
+    <footer class="container flex flex-row justify-between w-full px-8 py-4 mx-auto my-8 mt-auto text-xs text-center text-gray-400">
       <div>{{ $page.props.version }}</div>
       <div>Made with ♥ by <a href="https://mgk.dev" class="transition duration-200 ease-in-out border-b border-current hover:opacity-80" target="_blank">Simon Rubuano</a> as <a href="https://github.com/mgkprod/codetracker" class="transition duration-200 ease-in-out border-b border-current hover:opacity-80" target="_blank">open-source software</a>.</div>
     </footer>
